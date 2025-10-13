@@ -36,7 +36,7 @@
 				]
 			},
 			{
-				"name": "lastcdc",
+				"name": "lookup_lastcdc",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -49,18 +49,18 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "JsonSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
-							"recursive": false,
+							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
 					"dataset": {
-						"referenceName": "Ds_json_dynamic",
+						"referenceName": "ds_files_dynamic",
 						"type": "DatasetReference",
 						"parameters": {
 							"container": "bronze",
@@ -81,6 +81,11 @@
 			},
 			"cdc_col": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"cdc ": {
+				"type": "String"
 			}
 		},
 		"annotations": []
