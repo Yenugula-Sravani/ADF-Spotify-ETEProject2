@@ -1,0 +1,9 @@
+{
+	"name": "Spotify-ETE-ADF",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c104dcf3-69b3-471e-b7e7-d29ffcc00adc",
+		"tenantId": "de22f0ff-304a-4d91-ac2e-006a4dd5835c"
+	}
+}
