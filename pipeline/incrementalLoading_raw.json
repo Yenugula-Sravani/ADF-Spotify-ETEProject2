@@ -150,6 +150,44 @@
 						"value": "@greater(activity('AzureSqltodatalake').output.dataRead,0)",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Delete empty files",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "ds_parquet_dynamic",
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "bronze",
+										"folder": {
+											"value": "@pipeline().parameters.tableName",
+											"type": "Expression"
+										},
+										"file": {
+											"value": "@concat(pipeline().parameters.tableName,'_',variables('currentcdc'))",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "max_updated_cdc",
